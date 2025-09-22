@@ -21,7 +21,7 @@ static void Paths(String p, int r, int c){
     Paths(p+"Down ", r-1, c);
 }
 
-
+// for if there are paths that have restrictions in between...
 void Paths_Restrictions(String p,boolean Maze[][], int r, int c){
         if(c==Maze.length-1 && r==Maze.length-1){
             System.out.println(p);
@@ -36,3 +36,55 @@ void Paths_Restrictions(String p,boolean Maze[][], int r, int c){
         if(r<Maze.length-1)
             Paths_Restrictions(p+"Down ",Maze, r+1, c);
     }
+
+
+/// Here the maze can be traversed in 5 directions -- up, down, left, right, right-down diagonal
+/// obstructing osbtacles can be avoided
+/// Backtracking is implemented to ensure all paths are discovered without stepping on the same cell during one path itself.
+class MazePaths {
+    static int count = 1;
+
+    static void Paths_Restrictions(String p, boolean[][] Maze, int r, int c) {
+        if (r == Maze.length - 1 && c == Maze[0].length - 1) {
+            System.out.println((count++) + ": " + p);
+            return;
+        }
+        if (!Maze[r][c])
+            return;
+
+        Maze[r][c] = false;
+
+        if (c < Maze[0].length - 1)
+            Paths_Restrictions(p + "Right ", Maze, r, c + 1);
+        if (r < Maze.length - 1)
+            Paths_Restrictions(p + "Down ", Maze, r + 1, c);
+        if (r < Maze.length - 1 && c < Maze[0].length - 1)
+            Paths_Restrictions(p + "Diagonal ", Maze, r + 1, c + 1);
+        if (c > 0)
+            Paths_Restrictions(p + "Left ", Maze, r, c - 1);
+        if (r > 0)
+            Paths_Restrictions(p + "Up ", Maze, r - 1, c);
+
+        Maze[r][c] = true;
+    }
+
+    static void solver(boolean[][] Maze) {
+        count = 1;
+        Paths_Restrictions("", Maze, 0, 0);
+    }
+
+    public static void main(String[] args) {
+        int n = 3;
+        int m = 4;
+        boolean[][] maze = new boolean[n][m];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                maze[i][j] = true;
+
+        solver(maze);
+    }
+}
+
+
+
+
