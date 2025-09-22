@@ -12,8 +12,27 @@ static void Paths(String p, int r, int c){
   System.out.println(p);
     return;
   }
+  // just a small modification to include diagonal movement as well
+  if(c>1 && r>1)
+    Paths(p+"Diagonal ",r-1, c-1);
   if(c>1)
     Paths(p+"Right ", r, c-1);
   if(r>1)
     Paths(p+"Down ", r-1, c);
 }
+
+
+void Paths_Restrictions(String p,boolean Maze[][], int r, int c){
+        if(c==Maze.length-1 && r==Maze.length-1){
+            System.out.println(p);
+            return;
+        }
+        if(!Maze[r][c])
+            return;
+        if(c<Maze.length-1 && r<Maze.length-1)
+            Paths_Restrictions(p+ "Diagonal ",Maze, r+1, c+1);
+        if(c<Maze.length -1)
+            Paths_Restrictions(p+"Right ",Maze, r, c+1);
+        if(r<Maze.length-1)
+            Paths_Restrictions(p+"Down ",Maze, r+1, c);
+    }
