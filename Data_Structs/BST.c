@@ -29,6 +29,30 @@ Node* add(Node* x, char val){
     return x;
 }
 
+void Postorder(Node* a){
+    if(a==NULL){
+        return;
+    }
+    Postorder(a->l);
+    Postorder(a->r);
+    printf("%c ",a->d);
+}
+void Preorder(Node* a){
+    if(a==NULL){
+        return;
+    }
+    printf("%c ",a->d);
+    Postorder(a->l);
+    Postorder(a->r);
+}
+void Inorder(Node* a){
+    if(a==NULL){
+        return;
+    }
+    Postorder(a->l);
+    printf("%c ",a->d);
+    Postorder(a->r);
+}
 char Min(Node* x){
     while(x->p != NULL)
         x=x->p;
@@ -49,6 +73,13 @@ int main(){
         scanf(" %c",&c);
         a=add(a,c);
     }
+    printf("\nPre-Order : ");
+    Preorder(a);
+    printf("\nIn-Order : ");
+    Inorder(a);
+    printf("\nPost-Order : ");
+    Postorder(a);
+    
     char m=Min(a);
     char M=Max(a);
     printf("Minimum value: %c\nMaximum value: %c\n", m, M);
