@@ -75,6 +75,52 @@ void find_level(Node* a, int v, int lvl){
         printf("%d",lvl);
 }
 
+// to search for a value in the bst!
+void search(Node* a, char t){
+    if(a==NULL){
+       printf("Character - %c is Not Found\n",t);
+       return;
+    }
+    if(a->d < t)
+        search(a->r, t);
+    else if(a->d > t)
+        search(a->l, t);
+    else
+        printf("Character - %c is Found\n",t);
+}
+
+
+
+Node* MIN(Node* a) {
+    while (a && a->l != NULL)
+        a = a->l;
+    return a;
+}
+// to delete a node !! 
+Node* del(Node* a, char c) {
+    if (a == NULL)
+        return NULL;
+
+    if (c < a->d)
+        a->l = del(a->l, c);
+    else if (c > a->d)
+        a->r = del(a->r, c);
+    else {
+        if (a->l == NULL) {
+            Node* temp = a->r;
+            free(a);
+            return temp;
+        } else if (a->r == NULL) {
+            Node* temp = a->l;
+            free(a);
+            return temp;
+        }
+        Node* temp = MIN(a->r);
+        a->d = temp->d;
+        a->r = del(a->r, temp->d);
+    }
+    return a;
+}
 
 int main(){
     int num;
