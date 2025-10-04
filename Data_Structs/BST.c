@@ -63,6 +63,18 @@ char Max(Node* x){
         x=x->n;
     return x->d;
 }
+void find_level(Node* a, int v, int lvl){
+    if(a==NULL)
+        printf("-1");
+        
+    if(v < a->d)
+        find(a->l, v, lvl+1);
+    else if(a->d < v)
+        find(a->r, v, lvl+1);
+    else
+        printf("%d",lvl);
+}
+
 
 int main(){
     int num;
