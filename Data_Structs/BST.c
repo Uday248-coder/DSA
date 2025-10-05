@@ -3,15 +3,15 @@
 
 typedef struct Node{
     char d;
-    struct Node* n;
-    struct Node* p;
+    struct Node* l;
+    struct Node* r;
 }Node;
 
 Node* create(char v){
     Node* a = (Node*)malloc(sizeof(Node));
     a->d=v;
-    a->n=NULL;
-    a->p=NULL;
+    a->r=NULL;
+    a->l=NULL;
     return a;
 }
 Node* add(Node* x, char val){
@@ -20,10 +20,10 @@ Node* add(Node* x, char val){
     }
     
     if(val<x->d){
-        x->p=add(x->p,val);
+        x->l=add(x->l,val);
     }
     else{
-        x->n=add(x->n,val);
+        x->r=add(x->r,val);
     }
     
     return x;
@@ -54,13 +54,13 @@ void Inorder(Node* a){
     Postorder(a->r);
 }
 char Min(Node* x){
-    while(x->p != NULL)
-        x=x->p;
+    while(x->l != NULL)
+        x=x->l;
     return x->d;
 }
 char Max(Node* x){
-    while(x->n != NULL)
-        x=x->n;
+    while(x->r != NULL)
+        x=x->r;
     return x->d;
 }
 void find_level(Node* a, int v, int lvl){
@@ -68,9 +68,9 @@ void find_level(Node* a, int v, int lvl){
         printf("-1");
         
     if(v < a->d)
-        find(a->l, v, lvl+1);
+        find_level(a->l, v, lvl+1);
     else if(a->d < v)
-        find(a->r, v, lvl+1);
+        find_level(a->r, v, lvl+1);
     else
         printf("%d",lvl);
 }
@@ -137,7 +137,7 @@ int main(){
     Inorder(a);
     printf("\nPost-Order : ");
     Postorder(a);
-    
+    printf("\n");
     char m=Min(a);
     char M=Max(a);
     printf("Minimum value: %c\nMaximum value: %c\n", m, M);
