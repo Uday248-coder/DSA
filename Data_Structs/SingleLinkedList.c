@@ -110,6 +110,17 @@ void printList(Node* head){
     printf("END\n");
 }
 
+Node* recursiveInsert(Node* head, int ind, int v){ // insertion using recursion!!
+    if(ind <= 0 || head==NULL){
+        Node* new =create_single(v);
+        new->next = head;
+        return new;
+    }
+    head->next=recursiveInsert(head->next,ind-1,v);
+    return head;
+}
+
+
 //smaple main method, just to check working
 int main(void){
     Node* head = NULL;
