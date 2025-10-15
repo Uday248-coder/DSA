@@ -84,6 +84,38 @@ Node* add(Node* p1, Node* p2){
     return head;
 }
 
+Node* multiply(Node* p1, Node* p2){
+    Node* res=NULL;
+    for(Node* a=p1; a!=NULL;a=a->link){
+        for(Node* b=p2; b!=NULL;b=b->link){
+            int e = a->exp + b->exp;
+            float c = a->coef * b->coef;
+            
+            Node* temp = res;
+            while(temp!=NULL){
+                if(temp->exp==e){
+                    temp->coef=c;
+                    break;
+                }
+                temp=temp->link;
+            }
+            if(temp==NULL){
+                res=append(res,e,c);
+            }
+        }
+    }
+    return Sort(res);
+}
+
+Node* differentiate(Node* p){
+    Node* t=p;
+    while(t!=NULL){
+        t->coef=t->coef * t->exp;
+        t->exp -=1;
+        t=t->link;
+    }
+    return p;
+}
 
 void evaluate(Node* head, float x){
     double sum=0.0;
@@ -102,5 +134,6 @@ int main() {
     poly = append(poly, 4.0, 0);  // + 4
 
     evaluate(poly, 2); // Evaluate at x=2
+    
     return 0;
 }
