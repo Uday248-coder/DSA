@@ -15,8 +15,17 @@ Node* createNode(int val){
     x->right=NULL;
     return x;
 }
+// creating tree from user inputed values which were stored in array initially...
+Node* input(int arr[], int index, int size){
+    if(index>=size || arr[index]==-1)
+        return NULL;
+    Node* Tree = createNode(arr[index]);
+    Tree->left=input(arr,2*index+1,size);
+    Tree->right=input(arr,2*index+2,size);
+    return Tree;
+}
 
-
+// DFS tailored Traversals -- Pre, Post & In order
 void Post_order(Node* x){
     if(x==NULL)
         return;
@@ -42,14 +51,8 @@ void In_order(Node* x){
     In_order(x->right);
 }
 
-Node* input(int arr[], int index, int size){
-    if(index>=size || arr[index]==-1)
-        return NULL;
-    Node* Tree = createNode(arr[index]);
-    Tree->left=input(arr,2*index+1,size);
-    Tree->right=input(arr,2*index+2,size);
-    return Tree;
-}
+// BFS tailored Traversals -- Level-order & Reverse Level-Order
+
 
 int main(void){
     int arr[2000];
