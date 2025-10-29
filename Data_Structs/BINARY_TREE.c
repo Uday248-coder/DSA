@@ -52,7 +52,50 @@ void In_order(Node* x){
 }
 
 // BFS tailored Traversals -- Level-order & Reverse Level-Order
+typedef struct 
+{
+    Node* arr[5000];
+    int head,rear;
+}Queue;
 
+void enqueue(Queue* a, Node* x){
+    a->arr[a->rear++]=x;
+}
+
+Node* dequeue(Queue* a){
+    return a->arr[a->head++];
+}
+
+int is_empty(Queue* x){
+    return x->head==x->rear;
+}
+
+int* Lvl_order(Node* head, int size){
+    int* ans = (int*)malloc(sizeof(int)*size);
+    if(head==NULL)
+    return ans;
+    Queue p;
+    p.head=p.rear=0;
+    int i=0;
+    enqueue(&p,head);
+    while(!is_empty(&p)){
+        Node* cur = dequeue(&p);
+        ans[i++]=cur->data;
+        if(cur->left) enqueue(&p,cur->left);
+        if(cur->right) enqueue(&p,cur->right);
+    }
+    return ans;
+}
+
+int* Rev_Lvl_order(Node* head,int size){
+    int* org = Lvl_order(head,size);
+    int* ans = (int*)malloc(sizeof(int)*size);
+    for(int i=0;i<size;i++){
+        ans[i]=org[size-1-i];
+    }
+    free(org);
+    return &ans;
+}
 
 int main(void){
     int arr[2000];
