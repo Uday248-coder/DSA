@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/problems/print-diagonally4331/1
 class Solution {
     // so basically we move the array in bottom-left direction until there is no space to move, each traversed element is made -1 to
     static ArrayList<Integer> diagView(int mat[][]) {
