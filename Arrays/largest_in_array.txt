@@ -1,0 +1,28 @@
+//https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1
+//c++ sol
+class Solution {
+public:
+    int largest(vector<int>& arr) {
+        int m = arr[0];
+
+        for (int x : arr) {
+            if (x > m) {
+                m = x;
+            }
+        }
+
+        return m;
+    }
+};
+
+//java version
+class Solution {
+    public static int largest(int[] arr) {
+        // code here
+        int m = arr[0];
+        for(int i: arr)
+            if(m<i)
+                m=i;
+        return m;
+    }
+}
