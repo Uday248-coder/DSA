@@ -1,22 +1,20 @@
 //https://leetcode.com/problems/move-zeroes/submissions/2034684561/
-
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int z=0, nz=0;
-        while(nz<nums.size()){
-            if(nums[z]!=0){
-                z++;
-                nz=z;
+        //optimizing it.
+        int z=-1;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0){
+                z=i;
+                break;
             }
-            else{
-                if(nums[nz]==0){
-                    nz++;
-                }
-                else{
-                    nums[z]=nums[nz];
-                    nums[nz]=0;
-                }
+        }
+        for(int i=z;i<nums.size();i++){
+            if(nums[i]!=0){
+                nums[z]=nums[i];
+                nums[i]=0;
+                z++;
             }
         }
     }
