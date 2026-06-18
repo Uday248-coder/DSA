@@ -1,25 +1,26 @@
 //https://leetcode.com/problems/squares-of-a-sorted-array/
 // TC : O(N+M)
 // SC : O(N)
-//its a better approach i made using two pointers. gotta find the best approach
+//i made it faster idk..
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> temp;
         for(int i=0;i<nums.size();i++){
-            nums[i]=pow(nums[i],2);
+            temp.push_back(pow(nums[i],2));
         }
         int l=0, r=nums.size()-1;
-        vector<int> ans;
-        while(l<=r){
-            if(nums[l]>nums[r]){
-                ans.insert(ans.begin() + 0, nums[l]);
+        
+        for(int i=nums.size()-1;i>=0;i--){
+            if(temp[l]>temp[r]){
+                nums[i]=temp[l];
                 l++;
             }
             else{
-                ans.insert(ans.begin() + 0, nums[r]);
+                nums[i]=temp[r];
                 r--;
             }
         }
-        return ans;
+        return nums;
     }
 };
