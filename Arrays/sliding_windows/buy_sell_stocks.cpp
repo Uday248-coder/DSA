@@ -3,6 +3,22 @@
 
 // better solution
 
+/* class Solution {
+    public int maxProfit(int[] prices) {
+        int maxi=0;
+        int mini=prices[0];
+        for(int i=0;i<prices.length;i++){
+            if(prices[i]<mini)
+                mini = prices[i];
+            if(maxi < prices[i]-mini)
+                maxi=prices[i]-mini;
+        }
+        return maxi;
+    }
+}
+*/
+
+
 // since needed to find the difference between the buy and sell we just took care of the minimum val discovered so far while traversing 
 // and then finding the difference between that min and the current element and storing the maximum difference of this kind found so far
 class Solution {
