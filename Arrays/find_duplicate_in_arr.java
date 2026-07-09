@@ -1,6 +1,39 @@
 //https://leetcode.com/problems/find-the-duplicate-number/description/
 // MAIN CONSTRAINTS not to use extra space, not to modify the array.
 
+//using hashmap : although wrong since violates constraints.
+// TC : O(N)
+// SC : O(N)
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        unordered_map<int, bool> map; // extra O(N) space used.
+        for(int i=0;i<nums.size();i++){
+            map[nums[i]]=true;
+            if(map.size()!=i+1)
+                return nums[i];
+        }
+        return 0;
+    }
+};
+
+// one-pass.. : although wrong since violates constraints.
+// TC: O(N)
+// SC : O(1)
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end()); // array modification donoe
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i]==nums[i+1])
+                return nums[i];
+        }
+        return nums[0];
+    }
+};
+
+
+
 
 // a solution that gives TLE : Linear seacrh.
 class Solution {
