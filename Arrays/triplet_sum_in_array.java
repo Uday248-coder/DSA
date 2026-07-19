@@ -1,0 +1,7 @@
+//https://www.geeksforgeeks.org/problems/triplet-sum-in-array-1587115621/1
+
+// EXPECTED COMPLEXITIES::
+// TIME -- O(N^2)
+// SPACE -- O(1)
+
+// SORTING USING GAP METHOD FROM SHELL SORT AND THEN USING NESTED LOOP APPROACH TO FIND THAT TRIPLET.
