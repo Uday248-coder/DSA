@@ -3,20 +3,15 @@
 // EXPECTED TIME COMPLEXITIES : O(N LOGN)
 // EXPECTED SPACE COMPLEXITIES : O(N)
 
-
-// failed with ambiguity. unclear approach lead to unanswered doubts.
+// burte-force -> just linear checks -> TIME: O(N^2)
 class Solution {
     public int inversionCount(int arr[]) {
         int count=0;
-        int[] temp=new int[arr.length];
-        for(int i=0;i<arr.length;i++){
-          temp[i]=arr[i];
-        }
-        Arrays.sort(temp);
-        for(int i=0;i<temp.length;i++){
-            int a = Arrays.binarySearch(temp,arr[i]);
-            if(i>a)
-                count+=Math.abs(a-i);
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]>arr[j])
+                    count++;
+            }
         }
         return count;
     }
