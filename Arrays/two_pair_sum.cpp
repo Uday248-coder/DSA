@@ -25,3 +25,22 @@ class Solution {
         return answer;
     }
 };
+
+/// using set..
+
+class Solution {
+	public:
+	vector<vector<int>> getPairs(vector<int>& arr) {
+		unordered_set<int> s(arr.begin(), arr.end());
+		vector<vector<int>> ans;
+		for (int x : s) {
+			if (x > 0 && s.count(-x))
+				ans.push_back({-x, x});
+		}
+		
+		if (count(arr.begin(), arr.end(), 0) >= 2)
+			ans.push_back({0, 0});
+		sort(ans.begin(),ans.end());
+		return ans;
+	}
+};
