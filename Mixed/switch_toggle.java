@@ -32,12 +32,13 @@ class Toggle_Switch {
             System.out.print("Enter Integer(i) for Operation "+i+"::");
             int k=sc.nextInt();
             for(int j=1;j*k<N;j++){
-                if(switchs[(j*k)-1] ==1 ){
-                    switchs[(j*k)-1]=0;
-                }
-                else{
-                    switchs[(j*k)-1]=1;
-                }
+                switchs[(j*k)-1] ^=1; // simple xor with 1 to toggle between 0 and 1.. 0 xor 1 = 1  and 1 xor 1 =0
+                // if(switchs[(j*k)-1] ==1 ){
+                //     switchs[(j*k)-1]=0;
+                // }
+                // else{
+                //     switchs[(j*k)-1]=1;
+                // }
             }
         }
         System.out.println("The State of Switches:");
