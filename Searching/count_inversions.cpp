@@ -24,3 +24,47 @@ class Solution {
         return count;
     }
 };
+
+// CORRECT APPROACH
+
+class Solution {
+    int merger(vector<int> &arr, int l, int m, int r){
+        vector<int> temp;
+        int i=l, j=m+1;
+        int count=0;
+        while(i<=m && j<=r){
+            if(arr[i]<=arr[j]){
+                temp.push_back(arr[i++]);
+            }
+            else{
+                temp.push_back(arr[j++]);
+                count += (m-i +1);
+            }
+        }
+        while(i<=m)
+            temp.push_back(arr[i++]);
+        while(j<=r)
+            temp.push_back(arr[j++]);
+        
+        for (int k = l; k <= r; k++) {
+            arr[k] = temp[k - l];
+        }
+        return count;
+    }
+    int mergesort(vector<int> &arr, int l, int r){
+        int count=0;
+        if(l<r){
+            int m = l +(r-l)/2;
+            count += mergesort(arr,l,m);
+            count += mergesort(arr,m+1,r);
+            count += merger(arr,l,m,r);
+        }
+        return count;
+    }
+  public:
+    int inversionCount(vector<int> &arr) {
+        // gotta solve via modified mergesort
+        return mergesort(arr, 0, arr.size()-1);
+        
+    }
+};
