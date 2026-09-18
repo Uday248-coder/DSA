@@ -1,6 +1,6 @@
 //https://www.hackerearth.com/problem/algorithm/bishu-and-soldiers-227/?utm_source=header&utm_medium=search&utm_campaign=he-search
 
-//brute force - O(N^2) time.. can be optimised
+//brute force - O(N^2) time.. can be optimised further... i just sorted the powers of soldiers because it will help me in reducing my search space.. next optimisation planned is using binary search to find the mid point and use prefix sum to directly fetch the cummulative sum.
 /*
 // Sample code to perform I/O:
 
@@ -27,6 +27,7 @@ int main(){
 	for(int i=0;i<N;i++){
 		cin>>powers[i];
 	}
+	sort(powers.begin(), powers.end());
 	int Q;
 	cin>>Q;
 	vector<int> rounds(Q);
