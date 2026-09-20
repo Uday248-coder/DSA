@@ -1,6 +1,48 @@
 //https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
 // optimal approach -> using binary search
-
+// TC : O(n* log2(sum - max + 1))
+// SC: O(1)
+class Solution {
+    int allocatable(vector<int> &a, int n, int k, long long cap){
+        int student=1;
+        long long currsum=0;
+        for(int i=0;i<n;i++){
+            if(a[i] + currsum <= cap){
+                currsum+=a[i];
+                            }
+            else{
+                student++;
+                currsum=a[i];
+            }
+        }
+        return student;
+    }
+  public:
+    int findPages(vector<int> &arr, int k) {
+        if(arr.size()<k){
+            return -1;
+        }
+        long long l=arr[0];
+        long long h=0;
+        for(int i:arr){
+            if(l<i){
+                l=i;
+            }
+            
+            h+=i;
+        }
+        while(l<=h){
+            long long m= (h+l)/2;
+            if(allocatable(arr, arr.size(), k, m) <= k){
+                h=m-1;
+            }
+            else{
+                l=m+1;
+            }
+        }
+        return l;
+    }
+};
 
 // brute-forced -> works for k=2 by checking manual splits.. but gotta be better here now..
 class Solution {
