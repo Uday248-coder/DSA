@@ -29,7 +29,7 @@ int main(void){
         int ans=0;
         int sum1=0, sum2 =0;
         int i=0,j=0;
-        while(i<=n && j<=m){
+        while(i<n && j<m){
             if(s1[i]>s2[j]){
                 sum2+=s2[j];
                 j++;
