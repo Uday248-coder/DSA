@@ -1,5 +1,8 @@
 //https://www.spoj.com/problems/ANARC05B/
 
+//TC : O(n+m) per test case.
+//SC : O(N)  
+
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
