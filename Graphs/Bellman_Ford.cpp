@@ -1,15 +1,15 @@
 // this is the base implementation made for learning bellman _ ford algorithm
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct edge{
     int u, v, w;
 };
 void bellmanford(vector<edge>& E, int n, int e, int src){
-    vector<int> dist(v, INT_MAX);
+    vector<int> dist(n, INT_MAX);
     dist[src] = 0;
-
-    vector<int> parent(n, -1);
+    vector<int> parent(n,-1);
     
     for(int r=1;r<n;r++){
         bool wasupdated = false; // to stop further relaxations if minimum distances are reached.
@@ -20,7 +20,7 @@ void bellmanford(vector<edge>& E, int n, int e, int src){
 
             if(dist[u]!= INT_MAX && dist[u]+w < dist[v]){
                 dist[v] = dist[u] + w;
-                updated = true;
+                wasupdated = true;
                 parent[v]=u;
             }
         }
@@ -47,8 +47,8 @@ void bellmanford(vector<edge>& E, int n, int e, int src){
            continue;
         }
         vector<int> path;
-        for(int curr = i ; curr!=-1; curr = parent[cur]){
-            path.push_back(cur);
+        for(int curr = i ; curr!=-1; curr = parent[curr]){
+            path.push_back(curr);
         }
 
         for(int j=path.size()-1;j>=0;j--){
@@ -69,8 +69,6 @@ void bellmanford(vector<edge>& E, int n, int e, int src){
         cout <<endl;
     }
 }
-
-
 
 int main(void){
     int n, e;
