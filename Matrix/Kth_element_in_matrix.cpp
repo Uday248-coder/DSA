@@ -22,19 +22,18 @@ class Solution {
         int n=mat.size();
         int low = mat[0][0];
         int high = mat[n-1][n-1];
+        int ans = high;
         while(low<=high){
             int middle = low + (high-low)/2;
             int count = lowercount(mat, middle);
-            if(count == k){
-                return middle;
-            }
-            else if(count < k){
-                low = middle+1;
-            }
-            else{
+            if(count >= k){ // earlier, count == middle would immedeatly send back the middle but without knowing whether that 'middle' element actully existed inside the matrix or not, this one, goes further below by enacting over smaller elements until none smaller are present
+                ans = middle;
                 high = middle-1;
             }
+            else{
+                low = middle+1;
+            }
         }
-        return -1;
+        return ans;
     }
 };
