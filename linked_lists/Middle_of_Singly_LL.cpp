@@ -1,6 +1,7 @@
 //https://leetcode.com/problems/middle-of-the-linked-list/submissions/2174298092/
 
-// TC: O(N)
+// Brute-Force Approach Tha
+// TC: O(N + N/2) 
 // SC: O(1), i think so :)
 
 
