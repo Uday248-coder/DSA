@@ -1,4 +1,8 @@
 //https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1
+
+// TC: O(N) iterative approach
+// SC: O(1)
+
 /* Structure of Linked List Node
 class Node {
  public:
