@@ -11,9 +11,9 @@ struct items{
 };
 vector<items> Items(100);
 
-int n, W, bestProfit =0;
-int wt[100], profit[100], id[100];
-int taken[100], bestTaken[100];
+int n, W, bestProfit =0; // n -  number of nodes, W - Knapsack Capacity, bestProfit - the best Profit found so far
+int wt[100], profit[100], id[100]; // item values
+int taken[100], bestTaken[100]; // which all items are taken
 
 // the bound function -  to produce the remaining upper bound
 int bound(int level, int currW, int currP){
@@ -27,18 +27,44 @@ int bound(int level, int currW, int currP){
         i++;
     }
     if(i<n){
-        p += (W-w)*(profit[i] / wgt[i]);
+        p += (W-w)*(profit[i] / wt[i]);
     }
     return p;
 }
 
 // the actual calculation zone..
 void solve(int level, int cw, int cp){
-    
+    if(level == n){
+        if(cp>bestProfit){
+            for(int i=0;i<n;i++){
+                besttaken[i]=taken[i];
+            }
+            bestProfit = cp;
+        }
+        return;
+    }
+    if(cw + wt[level] <=W){
+        taken[level] = 1;
+        int nw = cw + wt[level];
+        int np = cp + profit[level];
+        if(np > bestProfit){
+            for(int i=0;i<n;i++){
+                besttaken[i]=taken[i];
+            }
+            bestProfit = np;
+        }
+        if(bound(level, nw, np) > bestProfit){
+            solve(level+1, nw, np);
+            taken[level]=0;
+        }
+        if(bound(level, cw, cp) > bestProfit){
+            solve(level+1, cw, cp);
+        }
+    }
 }
 
 int main(){
-    cout << "Enter number of Nodes and Knapsack Capacity: " ;
+    cout << "Enter number of Nodes and the Knapsack Capacity: " ;
     cin >> n >>W;
     cout << "Enter Item Profits and Weights: " <<endl;
     for(int i=0;i<n;i++){
@@ -58,7 +84,7 @@ int main(){
             }
         }
     }    
-    solve(0, 0, 0);
+    solve(0, 0, 0); // start at level=0 or first node with intial weights and profit as 0
     cout << "Maximum Profit: " << bestProfit << endl;
     cout << "Items Taken: ";
     for(int i=0;i<n;i++){
