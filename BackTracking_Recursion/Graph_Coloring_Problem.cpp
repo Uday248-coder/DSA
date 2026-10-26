@@ -1,6 +1,6 @@
 //https://www.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1
 
-// this version gives the first valid coloruing that fits right..
+// this version gives the first valid colouring that fits right..
 class Solution {
   public:
     
