@@ -13,7 +13,7 @@ class Node {
         next = nullptr;
     }
 };*/
-
+// this one is done via recursion i believe..
 class Solution {
   public:
     Node *reverseKGroup(Node *head, int k) {
@@ -50,6 +50,50 @@ class Solution {
         return prev;
     }
 };
+
+// this one is non-recurvise, iterative.
+/* Structure of linked list Node
+class Node {
+  public:
+    int data;
+    Node* next;
+
+    Node(int x){
+        data = x;
+        next = nullptr;
+    }
+};*/
+
+class Solution {
+  public:
+    Node *reverseKGroup(Node *head, int k) {
+        Node dum(0);
+        dum.next=head;
+        Node* PrevGroup = &dum; // this is previous groups last element.
+        while(PrevGroup->next != NULL){
+            Node* grp_head = PrevGroup->next; // current Groups original head before reversal
+            Node* prev = NULL;
+            Node* curr = grp_head;
+            int c=0;
+            while(curr!= NULL && c<k){
+                Node* next = curr->next;
+                curr->next=prev;
+                prev= curr;
+                curr=next;
+                c++;
+            }
+            
+            PrevGroup->next = prev;
+            grp_head->next = curr;
+            
+            PrevGroup=grp_head;
+        }
+        return  dum.next;
+    }
+};
+
+
+
 
 //VARIANT 2 SOLUTION-> 
 /**
