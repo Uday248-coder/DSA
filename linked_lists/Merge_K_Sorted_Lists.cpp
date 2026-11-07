@@ -1,7 +1,7 @@
 //https://www.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1
 
 
-// Non-optimal solution -> giving TLE for large inputs.
+// optimal solution -> using divide and conqueor
 /* Linked List Node Structure
 class Node {
   public:
@@ -17,8 +17,8 @@ class Node {
 class Solution {
   public:
     Node* merger(Node* head1, Node* head2){
-        Node* third=new Node(0);
-        Node* temp=third;
+        Node third(0);
+        Node* temp=&third;
         while(head1!=NULL && head2!=NULL){
             if(head1->data <=head2->data){
                 temp->next=head1;
@@ -35,14 +35,17 @@ class Solution {
         if(head2!=NULL){
             temp->next=head2;
         }
-        return third->next;
-    } 
+        return third.next;
+    }
+    Node* solve(vector<Node*>& arr, int l, int r){
+        if(l==r)
+            return arr[l];
+        int mid = (l+r)/2;
+        Node* left = solve(arr,l,mid);
+        Node* right = solve(arr,mid+1,r);
+        return merger(left,right);
+    }
     Node* mergeKLists(vector<Node*>& arr) {
-        // code here
-        Node* l1 = arr[0];
-        for(int i=1;i<arr.size();i++){
-            l1 = merger(l1,arr[i]);
-        }
-        return l1;
+        return solve(arr, 0, (int)(arr.size() - 1));
     }
 };
