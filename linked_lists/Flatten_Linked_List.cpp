@@ -3,6 +3,27 @@
 
 
 
+// uses divide and conqueor, hence faster
+Node* solve(vector<Node*>& cols, int left, int right ){
+        if(left == right)
+            return cols[left];
+        int mid = (right+left)/2;
+        Node* l = solve(cols, left, mid);
+        Node* r = solve(cols, mid+1, right);
+        return merger(l,r);
+    }
+    
+    Node* flatten(Node* head){
+        if(!head)
+            return head;
+        vector<Node*> cols;
+        for(Node* t=head; t; t=t->next){
+            cols.push_back(t);
+        }
+        return solve(cols, 0, (int)cols.size()-1);
+    }
+
+
 // Not-Optimal
 // TC : O(N*k)
 // SC : O(N)
