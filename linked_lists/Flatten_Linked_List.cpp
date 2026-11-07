@@ -3,19 +3,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Not-Optimal
 // TC : O(N*k)
 // SC : O(N)
@@ -37,8 +24,8 @@ public:
 class Solution {
   public:
     Node* merger(Node* head1, Node* head2){
-        Node* head = new Node(0);
-        Node* temp = head; 
+        Node head(0);
+        Node* temp = &head; 
         while(head1!=NULL && head2!=NULL){
             if(head1->data <= head2->data){
                 temp->bottom=head1;
@@ -53,7 +40,7 @@ class Solution {
             temp->bottom=head1;
         if(head2!=NULL)
             temp->bottom=head2;
-        return head->bottom;
+        return head.bottom;
     }
     Node* flatten(Node* head) {
         if(head==NULL || head->next == NULL)
@@ -63,11 +50,22 @@ class Solution {
         Node* temp = head->next;
         while(temp!=NULL){
             Node* next = temp->next;
-            // list1->next = NULL;
-            // temp->next = NULL;
+            list1->next = NULL;
+            temp->next = NULL;
             list1 = merger(list1, temp);
             temp = next;
         }
         return list1;
     }
+
+    // Recursive Method. still gives TLE on the last private testcase on GFG
+    Node* flatten(Node* head){
+        if(!head || !head->next){
+            return head;
+        }
+        head->next = flatten(head->next);
+        head = merger(head, head->next);
+        return head;
+    }
+
 };
