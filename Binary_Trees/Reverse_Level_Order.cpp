@@ -1,5 +1,38 @@
 //https://www.geeksforgeeks.org/problems/reverse-level-order-traversal/1
 
+
+// this one was learned and implemented.. here i am first extracting the nodes level by level and storing as a joint level as well.. then only i am working it out from last to first level ... as required
+class Solution {
+  public:
+    vector<int> reverseLevelOrder(Node *root) {
+        vector<int> ans;
+        vector<vector<int>> bylevel;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> curr;
+            for(int i=0;i<size;i++){
+                Node* x = q.front();
+                if(x->left)
+                    q.push(x->left);
+                if(x->right)
+                    q.push(x->right);
+                curr.push_back(x->data);
+                q.pop();
+            }
+            bylevel.push_back(curr);
+        }
+        for(int i=bylevel.size()-1 ; i>=0; i--){
+            for(int a : bylevel[i]){
+                ans.push_back(a);
+            }
+        }
+        return ans;
+    }
+};
+
+
 // I purely Lucked Out on this one
 // for i thought my logic was weak
 // here i was thought i'll take the elements in queue in the way you extract them in level order traversal
