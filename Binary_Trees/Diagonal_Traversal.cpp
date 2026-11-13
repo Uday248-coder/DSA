@@ -1,6 +1,25 @@
 // https://www.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1
 
-
+// a queue approach.. the idea is still blurred but yeah it works
+class Solution {
+  public:
+    vector<int> diagonal(Node *root) {
+        vector<int> ans;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            Node* curr = q.front();
+            q.pop();
+            while(curr){
+                if(curr->left)
+                    q.push(curr->left);
+                ans.push_back(curr->data);
+                curr = curr->right;
+            }
+        }
+        return ans;
+    }
+};
 
 // Modified idea to be correct..
 // base idea -> going right means same diagonal
